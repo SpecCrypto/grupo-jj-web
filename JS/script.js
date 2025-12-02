@@ -1,62 +1,93 @@
+/* =========================================
+   ARCHIVO JAVASCRIPT PRINCIPAL
+   - Control del Menú Móvil
+   - Control del Carrusel Hero 3D
+   ========================================= */
+
 document.addEventListener('DOMContentLoaded', () => {
 
     /* =========================================
-       1. CÓDIGO DEL MENÚ (TU CÓDIGO ORIGINAL)
+       1. MENÚ MÓVIL (INTERACCIÓN)
        ========================================= */
+    
     const menuToggle = document.getElementById('menu-toggle');
     const navMobile = document.getElementById('nav-mobile');
 
-    if (menuToggle) { // Pequeña seguridad por si acaso
+    // Evento al hacer clic en el botón de hamburguesa
+    if (menuToggle) {
         menuToggle.addEventListener('click', () => {
-            // Alternar la clase 'active' para mostrar/ocultar menú
+            // Alternar la clase 'active' para mostrar/ocultar el menú
             navMobile.classList.toggle('active');
             
-            // Cambiar el ícono (opcional)
-            if(navMobile.classList.contains('active')) {
-                menuToggle.innerHTML = "✕"; // Cruz de cerrar
+            // Lógica para cambiar el ícono y la posición del botón
+            if (navMobile.classList.contains('active')) {
+                menuToggle.innerHTML = "✕"; // Cambiar a Cruz de cerrar
+                
+                // Fijar botón para que no se pierda al hacer scroll mientras el menú está abierto
+                menuToggle.style.position = "fixed"; 
+                menuToggle.style.right = "20px";
+                menuToggle.style.top = "25px";
             } else {
-                menuToggle.innerHTML = "☰"; // Hamburguesa
+                menuToggle.innerHTML = "☰"; // Regresar a Hamburguesa
+                menuToggle.style.position = "absolute"; // Volver a su posición original
             }
         });
     }
 
-    // Cerrar menú al hacer clic en un enlace
-    const navLinks = document.querySelectorAll('.nav-mobile a');
-    navLinks.forEach(link => {
+    // Cerrar el menú automáticamente al hacer clic en un enlace
+    document.querySelectorAll('.nav-mobile a').forEach(link => {
         link.addEventListener('click', () => {
             navMobile.classList.remove('active');
-            if (menuToggle) menuToggle.innerHTML = "☰";
+            
+            // Restaurar el ícono y posición del botón
+            menuToggle.innerHTML = "☰";
+            menuToggle.style.position = "absolute";
         });
     });
 
 
     /* =========================================
-       2. CÓDIGO DEL CARRUSEL
+       2. CARRUSEL HERO (OBJETOS 3D)
        ========================================= */
     
-    // Seleccionamos todas las imágenes que tengan la clase .hero-slide
-    const slides = document.querySelectorAll('.hero-slide');
+    // Seleccionamos las imágenes con la clase '.hero-object'
+    const slides = document.querySelectorAll('.hero-object');
     let currentSlide = 0;
-    const slideInterval = 3000; // 3000ms = 3 segundos
+    const slideInterval = 4000; // Tiempo de transición: 4 segundos
 
+    // Función para cambiar a la siguiente diapositiva
     function nextSlide() {
-        // Verificamos que existan imágenes para evitar errores
         if (slides.length > 0) {
-            // 1. Quitar la clase 'active' de la imagen actual
+            // 1. Quitar la clase 'active' de la imagen actual (la oculta)
             slides[currentSlide].classList.remove('active');
-
-            // 2. Calcular cuál es la siguiente imagen
-            // (El operador % hace que cuando llegue a la última, vuelva a la 0)
+            
+            // 2. Calcular el índice de la siguiente imagen
+            // (El operador % asegura que el carrusel vuelva al inicio al llegar al final)
             currentSlide = (currentSlide + 1) % slides.length;
-
-            // 3. Poner la clase 'active' a la nueva imagen
+            
+            // 3. Agregar la clase 'active' a la nueva imagen (la muestra)
             slides[currentSlide].classList.add('active');
         }
     }
 
-    // Iniciar el temporizador automático solo si hay imágenes
+    // Iniciar el temporizador automático solo si existen imágenes
     if (slides.length > 0) {
         setInterval(nextSlide, slideInterval);
     }
+
+    /* =========================================
+       3. HEADER SCROLL EFFECT (NUEVO)
+       ========================================= */
+    const header = document.querySelector('.header-merged');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            // Si bajas más de 50px, ponle fondo azul
+            header.classList.add('scrolled');
+        } else {
+            // Si estás arriba, déjalo transparente
+            header.classList.remove('scrolled');
+        }
+    });
 
 });

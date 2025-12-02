@@ -8,57 +8,57 @@
 </head>
 <body>
 
-    <header class="header">
-        <div class="header-content">
-            <a href="#inicio" class="logo-container">
-                <img src="/img/logos/cromatic_logo.png" alt="JJ Auctions Logo">
-            </a>
+    <header class="header-merged">
+    <div class="header-content-centered">
+        
+        <a href="#inicio" class="logo-header-link">
+            <img src="/img/logos/cromatic_logo.png" alt="Grupo JJ Logo" class="header-logo-img">
+        </a>
 
-            <nav class="nav-desktop">
-                <a href="#inicio">INICIO</a>
-                <a href="#nosotros">NOSOTROS</a>
-                <a href="#empresas">EMPRESAS</a>
-                <a href="#servicios">SERVICIOS</a>
-                <a href="#contacto">CONTACTO</a>
-            </nav>
-
-            <button class="menu-toggle" id="menu-toggle">
-                ☰
-            </button>
-        </div>
-
-        <nav class="nav-mobile" id="nav-mobile">
+        <nav class="nav-desktop">
             <a href="#inicio">INICIO</a>
             <a href="#nosotros">NOSOTROS</a>
             <a href="#empresas">EMPRESAS</a>
             <a href="#servicios">SERVICIOS</a>
             <a href="#contacto">CONTACTO</a>
         </nav>
-    </header>
 
-   <section id="inicio" class="hero">
-    
-    <div class="hero-carousel">
-        <img src="/img/carrusel/autos4.png" alt="JJ Autos 1" class="hero-slide active">
-        <img src="/img/carrusel/almacen2.png" alt="JJ Autos 2" class="hero-slide">
-        <img src="/img/carrusel/trasero.jpg" alt="JJ Autos 3" class="hero-slide">
-        <img src="/img/carrusel/autos3.png" alt="JJ Autos 4" class="hero-slide">
+        <button class="menu-toggle" id="menu-toggle">☰</button>
     </div>
 
-    <div class="hero-overlay"></div>
+    <nav class="nav-mobile" id="nav-mobile">
+        <a href="#inicio">INICIO</a>
+        <a href="#nosotros">NOSOTROS</a>
+        <a href="#empresas">EMPRESAS</a>
+        <a href="#servicios">SERVICIOS</a>
+        <a href="#contacto">CONTACTO</a>
+    </nav>
+</header>
 
-    <div class="container hero-content">
+
+<section id="inicio" class="hero-3d-section">
+    <div class="container hero-grid-3d">
+        
+        <div class="hero-visuals">
+            <div class="glow-effect"></div>
+            <img src="/img/mercedes3.png" alt="Auto 3D" class="hero-object active">
+            <img src="/img/carrusel/grua-png.png" alt="Grúa 3D" class="hero-object">
+            <img src="/img/carrusel/pieza-png.png" alt="Motor 3D" class="hero-object">
+        </div>
+
     </div>
-
 </section>
 
+
     <section id="nosotros" class="about section-padding">
+        
         <div class="container grid-2">
             
-            <div class="about-video placeholder-box">
-                <span style="z-index: 10; position: relative;">Video Corporativo</span>
-                
-                <div class="play-btn"></div>
+            <div class="about-video">
+                <video autoplay muted loop playsinline poster="/img/carrusel/almacen2.png">
+                    <source src="/video/videoplayback.mp4" type="video/mp4">
+                    Tu navegador no soporta videos HTML5.
+                </video>
             </div>
 
             <div class="about-text">
@@ -81,43 +81,44 @@
                     inversionistas.
                 </p>
             </div>
-
         </div>
 
         <div class="values-block">
             <div class="container grid-2">
+                
                 <div class="values-text">
                     <span class="subtitle">Nuestros Valores</span>
                     <h2>Construyendo confianza</h2>
                     <p>
-                Creemos en la honestidad y en resaltar las características reales de 
-                cada unidad. Nuestro trabajo se centra en presentar vehículos con 
-                información clara y precisa, respetando la confianza que nuestros 
-                clientes depositan en nosotros y manteniendo la integridad de cada transacción.
-            </p>
-            
-            <p>
-                Sabemos que una compra o inversión segura genera tranquilidad y 
-                fidelidad. Por eso, creamos un entorno profesional y transparente 
-                donde cada cliente puede tener la certeza de que su operación será 
-                respaldada por un proceso sólido, ético y eficiente.
-            </p>
-
-            <p>
-                Cada cliente tiene necesidades y objetivos distintos. Nuestro equipo 
-                está preparado para asesorar de manera personalizada, ofreciendo 
-                orientación estratégica, información detallada y apoyo en cada paso.
-            </p>
-        </div>
-                <div class="values-grid">
-                    <div class="placeholder-box square">Foto 1</div>
-                    <div class="placeholder-box square">Foto 2</div>
-                    <div class="placeholder-box square">Foto 3</div>
-                    <div class="placeholder-box square">Foto 4</div>
+                        Creemos en la honestidad y en resaltar las características reales de 
+                        cada unidad. Nuestro trabajo se centra en presentar vehículos con 
+                        información clara y precisa, respetando la confianza que nuestros 
+                        clientes depositan en nosotros y manteniendo la integridad de cada transacción.
+                    </p>
+                    <p>
+                        Sabemos que una compra o inversión segura genera tranquilidad y 
+                        fidelidad. Por eso, creamos un entorno profesional y transparente 
+                        donde cada cliente puede tener la certeza de que su operación será 
+                        respaldada por un proceso sólido, ético y eficiente.
+                    </p>
+                    <p>
+                        Cada cliente tiene necesidades y objetivos distintos. Nuestro equipo 
+                        está preparado para asesorar de manera personalizada, ofreciendo 
+                        orientación estratégica, información detallada y apoyo en cada paso.
+                    </p>
                 </div>
+
+                <div class="values-grid">
+                    <img src="/img/reunion.png" alt="Foto 1" class="value-img">
+                    <img src="/img/almacen.png" alt="Foto 2" class="value-img">
+                    <img src="/img/mercedes.png" alt="Foto 3" class="value-img">
+                    <img src="/img/mercedes2.png" alt="Foto 4" class="value-img">
+                </div>
+
             </div>
-        </div>
+        </div>  
     </section>
+
 
     <section id="empresas" class="companies section-padding">
         <div class="container">
@@ -125,61 +126,53 @@
                 <span class="subtitle">Empresas</span>
                 <h2>Nuestras Marcas</h2>
             </div>
-           <div class="brands-grid">
-    
-    <div class="brand-card border-gray">
-        <a href="#" target="_blank" class="brand-link">
-            <img src="/img/logos/SubastaJJ.png" alt="Logo Subastas JJ">
-        </a>
-    </div>
-
-    <div class="brand-card border-yellow">
-        <a href="#" target="_blank" class="brand-link">
-            <img src="/img/logos/JTA.png" alt="Logo JTA Inmobiliaria">
-        </a>
-    </div>
-
-    <div class="brand-card border-red">
-        <a href="#" target="_blank" class="brand-link">
-            <img src="/img/logos/Gruas.png" alt="Logo Grúas Herp">
-        </a>
-    </div>
-
-    <div class="brand-card border-blue">
-        <a href="#" target="_blank" class="brand-link">
-            <img src="/img/logos/logo-remastered.png" alt="Logo Grupo JJ">
-        </a>
-    </div>
-
-</div>
+            
+            <div class="brands-grid">
+                <div class="brand-card border-gray">
+                    <a href="https://subastasjjauctions.com/" target="_blank" class="brand-link">
+                        <img src="/img/logos/SubastaJJ.png" alt="Logo Subastas JJ">
+                    </a>
+                </div>
+                <div class="brand-card border-yellow">
+                    <a href="https://subastasjjauctions.com/" target="_blank" class="brand-link">
+                        <img src="/img/logos/JTA.png" alt="Logo JTA Inmobiliaria">
+                    </a>
+                </div>
+                <div class="brand-card border-red">
+                    <a href="https://subastasjjauctions.com/" target="_blank" class="brand-link">
+                        <img src="/img/logos/Gruas.png" alt="Logo Grúas Herp">
+                    </a>
+                </div>
+                </div>
+            </div>
+        </div>
     </section>
 
+
     <section id="servicios" class="services">
+        
         <div class="services-banner">
             <div class="container grid-2">
                 
                 <div class="services-collage">
-                    <div class="placeholder-box vertical red-theme">Chatarra Vertical</div>
-                    <div class="placeholder-box red-theme">Autos 1</div>
-                    <div class="placeholder-box red-theme">Autos 2</div>
+                    <img src="/img/pilas.png" alt="Chatarra Vertical" class="service-img vertical">
+                    <img src="/img/almacen.png" alt="Autos 1" class="service-img">
+                    <img src="/img/carrusel/grua.jpg" alt="Autos 2" class="service-img">
                 </div>
 
                 <div class="services-intro">
                     <span class="subtitle white">Servicios</span>
                     <h2>Tenemos lo que <br>buscas</h2>
-                    
                     <p>
                         En Grupo JJ ofrecemos una gama completa de servicios especializados 
                         en Inhabilitación, compactación, destrucción y yunque, diseñados 
                         para atender las necesidades del sector automotriz, asegurador e industrial.
                     </p>
-                    
                     <p>
                         Nos enfocamos en brindar procesos seguros, controlados y totalmente 
                         alineados con las normativas vigentes, garantizando la correcta 
                         disposición de vehículos, maquinaria y materiales.
                     </p>
-
                     <p>
                         Cada uno de nuestros servicios está respaldado por equipos certificados, 
                         personal capacitado y protocolos estrictos, lo que nos permite asegurar 
@@ -193,75 +186,118 @@
         </div>
 
         <div class="services-details section-padding">
-            <div class="container grid-3-center">
-                <div class="side-img placeholder-box vertical">Lateral Izq</div>
-                
-                <div class="services-list">
+            
+            <div class="services-bg-layer">
+                <img src="/img/grua3.png" alt="" class="bg-img left-img">
+                <img src="/img/pilas2.jpg" alt="" class="bg-img right-img">
+                <div class="bg-overlay"></div>
+            </div>
+
+            <div class="container services-card">
+                <div class="services-list">        
                     <div class="service-item">
                         <h3>DESTRUCCIÓN</h3>
-                        <p>La destrucción asegura la eliminación total de los vehículos.</p>
+                        <p>
+                            La destrucción asegura la eliminación total de los vehículos 
+                            o materiales que no deben reincorporarse al mercado.
+                        </p>
                     </div>
                     <div class="service-item">
                         <h3>INHABILITACIÓN</h3>
-                        <p>El vehículo queda oficialmente fuera de circulación.</p>
+                        <p>
+                            Es el proceso mediante el cual un vehículo queda oficialmente fuera 
+                            de circulación, asegurando que no pueda volver a utilizarse de 
+                            manera legal o comercial.
+                        </p>
                     </div>
                     <div class="service-item">
                         <h3>COMPACTACIÓN</h3>
-                        <p>Reducción del volumen mediante maquinaria especializada.</p>
+                        <p>
+                            Consiste en la reducción del volumen de los vehículos mediante maquinaria 
+                            especializada que los comprime hasta convertirlos en bloques metálicos. 
+                            Este proceso permite optimizar espacio, facilitar el reciclaje y cumplir 
+                            con los protocolos ambientales establecidos por las autoridades.
+                        </p>
                     </div>
                     <div class="service-item">
                         <h3>YUNQUE</h3>
-                        <p>Manipulación, separación y aprovechamiento de materiales.</p>
+                        <p>
+                            El servicio de Yunque está orientado a la manipulación, separación y 
+                            aprovechamiento de materiales provenientes de unidades inhabilitadas o destruidas. 
+                            Nuestro equipo realiza este trabajo con precisión y cuidado, promoviendo el reciclaje.
+                        </p>
                     </div>
                 </div>
-
-                <div class="side-img placeholder-box vertical">Lateral Der</div>
             </div>
         </div>
     </section>
 
-    <section id="contacto" class="contact section-padding">
-        <div class="contact-bg placeholder-box">Fondo Autos</div>
-        <div class="contact-overlay"></div>
-        
-        <div class="container grid-2 relative">
-            <div class="contact-info">
-                <p class="italic-white">¿Quieres más información?</p>
-                <h2>CONTÁCTANOS</h2>
-                <div class="info-block">
-                    <p><strong>UBICACIÓN:</strong> Peralvillo 71, Peralvillo, Morelos, CDMX</p>
-                    <p><strong>TELÉFONO:</strong> (+52) 56 1451 9794</p>
-                    <p><strong>MAIL:</strong> contacto@subastasjjauctions.com</p>
-                    <p><strong>WEB:</strong> https://subastasjjauctions.com/</p>
+
+    <section id="contacto" class="contact-section">
+        <div class="container contact-grid">
+            
+            <div class="contact-details">
+                <div class="section-header-left text-center">
+                    <span class="subtitle">¿Quieres más información?</span>
+                    <h2>Contáctanos</h2>
+                </div>
+                
+                <div class="contact-list">
+                    <div class="contact-item">
+                        <div class="icon-box">📍</div> 
+                        <div>
+                            <strong>UBICACIÓN:</strong>
+                            <p>Peralvillo 71, Peralvillo, Morelos, Cuauhtémoc, 06200 Ciudad de México, CDMX</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="icon-box">📞</div>
+                        <div>
+                            <strong>TELÉFONO:</strong>
+                            <p>(+52) 56 1451 9794</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="icon-box">✉️</div>
+                        <div>
+                            <strong>MAIL:</strong>
+                            <p>contacto@subastasjjauctions.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="icon-box">🌐</div>
+                        <div>
+                            <strong>WEB:</strong>
+                            <p><a href="https://subastasjjauctions.com/" target="_blank">https://subastasjjauctions.com/</a></p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="contact-map">
-                <div class="placeholder-box map-style">Google Maps</div>
+
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.139637736696!2d-99.13376792478496!3d19.45330368183015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f930e7939e3d%3A0x629070950369796e!2sC.%20Peralvillo%2071%2C%20Peralvillo%2C%20Morelos%2C%20Cuauht%C3%A9moc%2C%2006200%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
+
         </div>
     </section>
 
-    <footer>
-        <div class="container grid-2">
-            <div>
-                <h4>ENCUÉNTRANOS</h4>
-                <p>Peralvillo 71, Peralvillo, Morelos, Cuauhtémoc, 06200 Ciudad de México, CDMX</p>
-                <p>(+52) 56 1451 9794</p>
+
+    <footer class="main-footer">
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2025 GRUPO JJ AUTOMOTRIZ. Todos los derechos reservados.</p>
             </div>
-            <div>
-                <h4>EXPLORA</h4>
-                <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#nosotros">Nosotros</a></li>
-                    <li><a href="#empresas">Empresas</a></li>
-                    <li><a href="#servicios">Servicios</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="copyright">
-            © 2025 Subastas JJ Auctions. Todos los derechos reservados.
         </div>
     </footer>
 

@@ -1,7 +1,10 @@
-/* --- VARIABLES DE COLORES (TU PALETA) --- */
+/* =========================================
+   1. VARIABLES Y CONFIGURACIÓN GLOBAL
+   ========================================= */
 :root {
     --brand-red: #BF1B28;
-    --brand-blue: #03418c;
+    /* Azul Rey Institucional Fuerte */
+    --brand-blue: #00477E; 
     --brand-yellow: #FAC22D;
     --brand-gray: #BCBABB;
     --text-dark: #111111;
@@ -9,23 +12,18 @@
     --white: #ffffff;
 }
 
-/* 1. Activa la transición suave en toda la página */
-html {
-    scroll-behavior: smooth;
-}
-
-/* 2. Corrige el problema del Header tapando el título */
-/* Como tu header mide 100px, empujamos el contenido 110px hacia abajo al hacer scroll */
-section {
-    scroll-margin-top: 110px;
-}
-
-/* --- ESTILOS GENERALES --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+html {
+    scroll-behavior: smooth; 
+}
+
+/* Ajuste para Header fijo */
+section { scroll-margin-top: 110px; }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -43,6 +41,14 @@ ul { list-style: none; }
 }
 
 .section-padding { padding: 80px 0; }
+
+h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
 .subtitle {
     display: block;
     font-size: 1.2rem;
@@ -52,221 +58,177 @@ ul { list-style: none; }
 }
 .subtitle.white { color: rgba(255,255,255,0.8); }
 
-h2 {
-    font-size: 3rem;
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 20px;
-}
 
-/* --- PLACEHOLDER (CAJAS GRISES) --- */
-.placeholder-box {
-    background-color: #ddd;
-    border: 2px dashed #999;
-    color: #666;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    min-height: 200px; /* Altura mínima por defecto */
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-/* --- HEADER --- */
-.header {
-    background-color: rgb(1, 39, 177);
-    width: 100%;
-    height: 100px; /* Aumentamos un poco la altura de la barra azul */
-    position: sticky;
-    top: 0;
+/* =========================================
+   2. HEADER (CON LOGO Y MENÚ)
+   ========================================= */
+.header-merged {
+    position: fixed; /* Fijo al hacer scroll */
+    top: 0; left: 0; width: 100%; height: 80px;
     z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background: transparent; 
+    transition: background-color 0.3s ease;
 }
 
-.header-content {
+.header-merged.scrolled {
+    background-color: var(--brand-blue); 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.header-content-centered {
     display: flex;
-    justify-content: space-between;
+    /* CAMBIO: Separa Logo a la izq y Menú a la derecha */
+    justify-content: space-between; 
     align-items: center;
     height: 100%;
-    
-    /* CAMBIO CLAVE: Ancho completo */
-    width: 100%; 
-    max-width: 100%; /* Quitamos el límite de 1200px para que llegue a las esquinas */
-    padding: 0 40px; /* Ajusta este valor: menos px = más pegado a la esquina */
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative; 
+    padding: 0 20px;
 }
 
-/* CAMBIO CLAVE: Logo Grande */
-.logo-container img {
-    height: 130px; /* Casi del mismo tamaño que el header (100px) */
+/* Nuevo Estilo para el Logo en el Header */
+.logo-header-link {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.header-logo-img {
+    height: 55px; /* Tamaño ajustado para la barra */
     width: auto;
-    display: block; /* Elimina espacios fantasma */
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    transition: transform 0.3s ease;
+}
+.logo-header-link:hover .header-logo-img { transform: scale(1.05); }
+
+/* Menú Escritorio */
+.nav-desktop { 
+    display: flex; 
+    gap: 40px; 
 }
 
-.nav-desktop { display: flex; gap: 30px; }
 .nav-desktop a {
-    color: var(--white);
-    font-weight: bold;
+    color: white;
+    font-weight: 700;
+    font-size: 0.95rem;
     text-transform: uppercase;
-    font-size: 0.9rem;
+    letter-spacing: 1px;
     transition: color 0.3s;
 }
 .nav-desktop a:hover { color: var(--brand-yellow); }
 
-.menu-toggle { display: none; background: none; border: none; color: white; font-size: 2rem; cursor: pointer; }
-.nav-mobile { display: none; } /* Se maneja con JS */
+/* Elementos Móviles */
+.menu-toggle { 
+    display: none; 
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 2000;
+}
 
-/* --- HERO (Efecto Glass en PANTALLA COMPLETA) --- */
-/* --- HERO --- */
-.hero {
-    height: 60vh;
+.nav-mobile { 
+    display: none; 
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100vh;
+    background-color: rgba(3, 88, 140, 0.98); 
+    backdrop-filter: blur(10px);
+    z-index: 1500;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s;
+}
+
+.nav-mobile.active {
+    opacity: 1;
+    visibility: visible;
+    display: flex;
+}
+
+.nav-mobile a {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 15px 0;
+    transition: transform 0.3s ease;
+}
+.nav-mobile a:hover { color: var(--brand-yellow); }
+
+
+/* =========================================
+   3. HERO SECTION (SOLO IMÁGENES CENTRADAS)
+   ========================================= */
+.hero-3d-section {
     position: relative;
+    width: 100%;
+    min-height: 85vh; /* Altura cómoda para lucir el auto */
+    /* Azul Rey Institucional */
+    background: radial-gradient(circle at 50% 50%, #00477E 20%, #002a4d 100%);
     display: flex;
     align-items: center;
-    justify-content: center;
+    padding-top: 80px; 
     overflow: hidden;
 }
 
-/* --- NUEVO: Estilos para el Carrusel de Imágenes --- */
-.hero-carousel {
-    position: absolute;
-    top: 0;
-    left: 0;
+/* CAMBIO CLAVE: Contenedor Centrado */
+.hero-grid-3d {
+    display: flex; /* Flex para centrar */
+    justify-content: center; 
+    align-items: center;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Capa 1: Al fondo */
-}
-
-.hero-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    
-    /* CLAVE: Esto hace que la imagen se ajuste al tamaño del container */
-    object-fit: cover; 
-    
-    /* Efecto de transición (Fade) */
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-.hero-slide.active {
-    opacity: 1; /* Solo la imagen activa se ve */
-}
-
-/* 1. CAMBIO PRINCIPAL: El efecto Glass va AQUI, en el Overlay */
-.hero-overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 2; /* Capa 2: Encima de las fotos */
-    
-    /* Tu color original */
-    background: rgba(181, 181, 181, 0.6); 
-    
-    /* Tu blur original */
-    backdrop-filter: blur(1px);
-    -webkit-backdrop-filter: blur(1px); 
-}
-
-/* 2. CAMBIO: Limpiamos la caja de texto */
-.hero-content {
-    position: relative;
-    z-index: 3; /* Capa 3: Hasta arriba */
-    text-align: center;
-    max-width: 900px;
-    padding: 20px;
-    
-    background: transparent;
-    border: none;
-    box-shadow: none;
-}
-
-.hero h1 { 
-    color: white; 
-    font-size: 3.5rem; 
-    text-transform: uppercase; 
-    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    margin: 0;
-    letter-spacing: 2px;
-}
-
-/* --- ABOUT (NOSOTROS) --- */
-.values-block { 
-    position: relative; /* Necesario para que el overlay se posicione bien */
-    padding: 80px 0; 
-    margin-top: 60px;
-    
-    /* Aquí iría la imagen de fondo real (autos/deshuesadero) */
-    /* Mientras no tengas la imagen, el color de fondo será gris claro */
-    background-image: url('/img/image.png'); /* Asegúrate de poner una imagen aquí luego */
-    background-size: cover;
-    background-position: center;
-    background-color: #e0e0e0; /* Color de respaldo si no hay imagen */
-}
-
-/* EL EFECTO DE TRANSPARENCIA GRIS (Overlay) */
-.values-block::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    
-    /* Este es el color gris con transparencia (Alpha = 0.85) */
-    /* Permite ver la imagen de fondo muy suavemente detrás */
-    background-color: rgba(220, 220, 220, 0.126); 
-    
-    z-index: 1; /* Queda encima de la foto de fondo */
-}
-
-/* Aseguramos que el contenido (texto y fotos) quede ENCIMA del overlay */
-.values-block .container {
     position: relative;
     z-index: 2;
 }
 
-/* --- Ajuste del bloque de texto en Valores --- */
-.values-text {
-    /* 1. Margen derecho para separar el texto de las fotos */
-    padding-right: 60px; 
-    
-    /* 2. Alineación vertical para que quede centrado respecto a las fotos */
+/* Contenedor Visual (Carrusel) */
+.hero-visuals {
+    position: relative;
+    /* Altura grande para que las imágenes luzcan */
+    height: 700px; 
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    margin: 0 auto;
 }
 
-/* --- Ajuste de los párrafos --- */
-.values-text p {
-    margin-bottom: 30px;
-    line-height: 1.8;
-    text-align: justify; /* Mantiene el justificado */
-    
-    /* Opcional: Si sientes que el texto sigue muy ancho, puedes limitar el ancho máximo */
-    /* max-width: 90%; */ 
+/* Brillo detrás del auto */
+.glow-effect {
+    position: absolute;
+    width: 700px; 
+    height: 700px;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 65%);
+    border-radius: 50%;
+    z-index: 1;
 }
 
-/* --- IMPORTANTE: Ajuste para Celular --- */
-/* En celular quitamos ese margen derecho porque las fotos pasan abajo */
-@media (max-width: 900px) {
-    .values-text {
-        padding-right: 0; /* Se quita el margen en móvil */
-        margin-bottom: 40px; /* Espacio para separar de las fotos que van abajo */
-    }
+/* Imágenes Flotantes 3D */
+.hero-object {
+    position: absolute;
+    max-width: 90%; 
+    max-height: 90%;
+    z-index: 2;
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5)); 
+    opacity: 0;
+    transform: translateX(50px); 
+    transition: all 1s ease-in-out;
 }
 
-.values-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
+.hero-object.active { 
+    opacity: 1;
+    transform: translateX(0) scale(1.35); /* Zoom para impacto */
 }
-.square { aspect-ratio: 1/1; min-height: auto; }
 
+
+/* =========================================
+   4. SECCIÓN NOSOTROS
+   ========================================= */
 .grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -277,193 +239,314 @@ h2 {
 .about-text p { margin-bottom: 1.5rem; text-align: justify; }
 
 .about-video {
-    aspect-ratio: 4/3;
     position: relative;
-    border: none;
-}
-.play-btn {
-    position: absolute;
-    width: 80px; height: 80px;
-    background: rgba(255,255,255,0.8);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-}
-.play-btn::after {
-    content: '';
-    display: block;
-    width: 0; height: 0;
-    border-top: 12px solid transparent;
-    border-bottom: 12px solid transparent;
-    border-left: 20px solid #333;
-    margin-left: 5px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    align-self: center;
+    aspect-ratio: 16 / 9; 
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+    background-color: #000;
 }
 
-.values-block { background-color: #f9f9f9; padding: 60px 0; margin-top: 60px; }
+.about-video video {
+    width: 100%; height: 100%;
+    object-fit: cover; 
+    display: block;
+}
+
+
+/* =========================================
+   5. SECCIÓN VALORES
+   ========================================= */
+.values-block { 
+    position: relative;
+    padding: 80px 0; 
+    margin-top: 60px;
+    background-image: url('/img/image.png');
+    background-size: cover;
+    background-position: center;
+    background-color: #e0e0e0;
+}
+
+.values-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(220, 220, 220, 0.85); 
+    z-index: 1;
+}
+
+.values-block .container { position: relative; z-index: 2; }
+
+.values-text {
+    padding-right: 60px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.values-text p {
+    margin-bottom: 30px;
+    line-height: 1.8;
+    text-align: justify;
+}
+
 .values-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
-.square { aspect-ratio: 1/1; min-height: auto; }
 
-/* --- EMPRESAS --- */
+.value-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    border-radius: 12px;
+}
+
+
+/* =========================================
+   6. SECCIÓN EMPRESAS
+   ========================================= */
+#empresas.section-padding {
+    padding-top: 20px; 
+    padding-bottom: 80px; 
+}
+
 .section-header { text-align: center; margin-bottom: 50px; }
+
 .brands-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
     justify-items: center;
 }
+
 .brand-card {
-    width: 220px; /* Ajusté un poco el tamaño total del cuadro */
-    height: 220px;
+    width: 220px; height: 220px;
     background: white;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
-    /* Centrado del contenido */
+    transition: transform 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Quitamos el padding aquí para controlarlo mejor en la imagen */
 }
+.brand-card:hover { transform: translateY(-5px); cursor: pointer; }
 
-/* Efecto Hover (Sigue igual) */
-.brand-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    cursor: pointer;
-}
-
-/* El enlace contenedor */
 .brand-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; height: 100%;
 }
 
-/* --- CAMBIO CLAVE AQUÍ --- */
 .brand-link img {
-    /* En lugar de 100%, usamos 85% para dejar espacio alrededor */
-    max-width: 85%;
-    max-height: 85%;
-    
-    /* object-fit: contain asegura que el logo NO se deforme */
+    max-width: 85%; max-height: 85%;
     object-fit: contain; 
-    
-    filter: grayscale(100%); /* (Opcional: Logos en gris) */
+    filter: grayscale(100%);
     transition: filter 0.3s;
 }
+.brand-card:hover img { filter: grayscale(0%); }
 
-/* (Opcional: Hover a color) */
-.brand-card:hover img {
-    filter: grayscale(0%);
-}
-
-/* Los bordes de colores (Siguen igual) */
 .border-gray { border: 6px solid var(--brand-gray); }
 .border-yellow { border: 6px solid var(--brand-yellow); }
 .border-red { border: 6px solid var(--brand-red); }
 .border-blue { border: 6px solid var(--brand-blue); }
 
-/* --- SERVICIOS --- */
-/* 1. Ajustamos el padding del banner rojo para que sea más alto y todo quepa dentro */
+
+/* =========================================
+   7. SECCIÓN SERVICIOS
+   ========================================= */
 .services-banner { 
     background-color: var(--brand-red); 
     color: white; 
-    padding: 80px 0; /* Aumentamos espacio arriba y abajo */
-    overflow: hidden; /* CLAVE: Esto corta cualquier cosa que intente salirse */
+    padding: 80px 0; 
+    overflow: hidden; 
 }
 
-/* 2. Ajustamos el collage para que esté centrado verticalmente respecto al texto */
+.services-banner .grid-2 {
+    grid-template-columns: 2fr 1fr; 
+    gap: 60px;
+    align-items: center;
+}
+
 .services-collage {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    height: 400px; /* Aumentamos un poco la altura para que luzca mejor junto a tanto texto */
-    align-self: center; /* Centra las imágenes verticalmente en el bloque rojo */
+    grid-template-columns: 1.3fr 1fr; 
+    grid-template-rows: 1fr 1fr;
+    gap: 25px;
+    height: 400px; 
+    width: 100%;
 }
 
-.red-theme { 
-    background-color: #900d16; 
-    border: 2px dashed #d64550; 
-    color: #ffcccc; 
+.service-img {
+    width: 100%; height: 100%;
+    object-fit: cover; 
+    border-radius: 6px; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3); 
+    display: block;
 }
 .vertical { grid-row: span 2; height: 100%; }
 
-/* 3. Estilos para los párrafos nuevos */
 .services-intro p { 
-    margin-bottom: 20px; /* Espacio entre párrafos */
+    margin-bottom: 20px; 
     opacity: 0.9; 
-    font-size: 1rem; /* Tamaño legible */
+    font-size: 1rem; 
     line-height: 1.6;
-    text-align: justify; /* Para que se vea cuadradito y ordenado como en tu imagen */
+    text-align: justify; 
 }
 
-/* Estilos de la parte blanca (sin cambios mayores) */
-.services-details { background: white; }
-.grid-3-center {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    gap: 40px;
+/* Detalles 3D */
+.services-details {
+    position: relative;
+    padding: 100px 0;
+    background-color: #f0f0f0;
+    overflow: hidden;
 }
+
+.services-bg-layer {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex;
+    z-index: 1;
+}
+.bg-img { width: 50%; height: 100%; object-fit: cover; }
+.bg-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7); 
+}
+
+.services-card {
+    position: relative; z-index: 2;
+    background: white;
+    padding: 60px;
+    border-radius: 12px;
+    max-width: 1000px;
+    margin: 0 auto;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); 
+}
+
 .services-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    gap: 40px 50px;
     text-align: center;
 }
-.service-item h3 { font-style: italic; margin-bottom: 10px; font-size: 1.4rem; }
 
-/* --- CONTACTO --- */
-.contact { position: relative; color: white; }
-.contact-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #222; border: none; z-index: 1; }
-.contact-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2; }
-.relative { position: relative; z-index: 3; }
-
-.italic-white { font-style: italic; color: #ccc; font-size: 1.2rem; }
-.info-block p { margin-bottom: 15px; font-size: 1.1rem; }
-.info-block strong { color: white; display: block; }
-.info-block a { color: #ccc; }
-.info-block a:hover { color: var(--brand-yellow); }
-
-.map-style { background: #eef; border: 2px solid var(--brand-blue); color: var(--brand-blue); height: 350px; }
-
-/* --- FOOTER --- */
-footer { background-color: var(--brand-gray); padding: 60px 0 20px; color: #222; }
-footer h4 { border-bottom: 2px solid #333; display: inline-block; margin-bottom: 20px; padding-bottom: 5px; }
-footer ul li { margin-bottom: 10px; }
-footer a:hover { color: var(--brand-red); padding-left: 5px; transition: 0.3s; }
-.copyright { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #999; font-size: 0.9rem; }
-
-/* --- RESPONSIVE (CELULAR) --- */
-@media (max-width: 900px) {
-    .nav-desktop { display: none; }
-    .menu-toggle { display: block; }
-    
-    .nav-mobile {
-        display: none; /* JS lo hará block */
-        position: absolute;
-        top: 90px; left: 0; width: 100%;
-        background: var(--brand-blue);
-        text-align: center;
-    }
-    .nav-mobile.active { display: flex; flex-direction: column; }
-    .nav-mobile a { color: white; padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-
-    .grid-2, .grid-3-center { grid-template-columns: 1fr; }
-    .about-video { margin-bottom: 30px; } /* Video arriba en celular */
-    .services-collage { display: none; } /* Ocultar collage en móvil o ajustarlo */
-    .side-img { display: none; } /* Ocultar barras laterales en móvil */
-    .services-list { grid-template-columns: 1fr; }
-    
-    h2 { font-size: 2.2rem; }
-    .hero h1 { font-size: 2rem; }
+.service-item h3 { 
+    font-style: italic; font-weight: 800; font-size: 1.4rem; 
+    margin-bottom: 10px; color: #111; text-transform: uppercase;
+}
+.service-item p {
+    font-size: 0.95rem; line-height: 1.4; 
+    color: #444; text-align: justify; margin: 0;
 }
 
-#empresas.section-padding {
-    padding-top: 20px; 
-    padding-bottom: 80px; 
+
+/* =========================================
+   8. SECCIÓN CONTACTO
+   ========================================= */
+.contact-section {
+    background-color: #f4f6f8;
+    padding: 100px 0;
+    color: #333;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.text-center { text-align: center; width: 100%; }
+.section-header-left h2 {
+    color: var(--brand-blue);
+    font-size: 2.8rem;
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+.section-header-left .subtitle { color: var(--brand-red); font-weight: 600; }
+
+.contact-list { display: flex; flex-direction: column; gap: 30px; }
+.contact-item { display: flex; align-items: flex-start; gap: 20px; }
+.icon-box { font-size: 1.5rem; }
+
+.contact-item strong {
+    display: block; color: #111; font-size: 0.9rem; margin-bottom: 5px;
+}
+.contact-item p, .contact-item a {
+    color: #555; font-size: 1.1rem; line-height: 1.4;
+}
+.contact-item a:hover { color: var(--brand-blue); text-decoration: underline; }
+
+.map-container {
+    width: 100%; height: 450px;
+    background: white; padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+.map-container iframe { border-radius: 8px; display: block; }
+
+
+/* =========================================
+   9. FOOTER
+   ========================================= */
+.main-footer {
+    width: 100%;
+    background-color: var(--brand-blue);
+    color: white;
+    margin-top: auto;
+}
+
+.footer-bottom {
+    padding: 25px 0;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+
+/* =========================================
+   10. RESPONSIVE DESIGN (MÓVILES)
+   ========================================= */
+@media (max-width: 900px) {
+    /* Header */
+    .nav-desktop { display: none; }
+    .menu-toggle { display: block; }
+
+    /* Hero */
+    .hero-visuals { height: 300px; margin-top: 30px; }
+    /* Ajuste para que el carrusel se vea bien en celular */
+    .hero-object { max-width: 100%; }
+
+    /* Grids Generales */
+    .grid-2, .grid-3-center, .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    /* Textos */
+    .about-text, .values-text { padding-right: 0; text-align: center; }
+    .about-video { margin-bottom: 30px; }
+    
+    /* Servicios */
+    .services-bg-layer { display: none; }
+    .services-card { box-shadow: none; padding: 30px; width: 90%; }
+    .services-list { grid-template-columns: 1fr; gap: 30px; }
+    
+    /* Contacto */
+    .map-container { height: 350px; order: -1; }
+    
+    /* Footer */
+    .footer-bottom { padding: 20px 10px; font-size: 0.8rem; }
 }
