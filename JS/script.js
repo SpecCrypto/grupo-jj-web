@@ -16,20 +16,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Evento al hacer clic en el botón de hamburguesa
     if (menuToggle) {
         menuToggle.addEventListener('click', () => {
-            // Alternar la clase 'active' para mostrar/ocultar el menú
+            // 1. Alternar la visibilidad del menú
             navMobile.classList.toggle('active');
             
-            // Lógica para cambiar el ícono y la posición del botón
+            // 2. NUEVO: Alternar el bloqueo de scroll en el cuerpo de la página
+            document.body.classList.toggle('no-scroll');
+            
+            // 3. Cambiar ícono y posición
             if (navMobile.classList.contains('active')) {
-                menuToggle.innerHTML = "✕"; // Cambiar a Cruz de cerrar
-                
-                // Fijar botón para que no se pierda al hacer scroll mientras el menú está abierto
+                menuToggle.innerHTML = "✕"; 
                 menuToggle.style.position = "fixed"; 
                 menuToggle.style.right = "20px";
                 menuToggle.style.top = "25px";
             } else {
-                menuToggle.innerHTML = "☰"; // Regresar a Hamburguesa
-                menuToggle.style.position = "absolute"; // Volver a su posición original
+                menuToggle.innerHTML = "☰"; 
+                menuToggle.style.position = "relative";
+                menuToggle.style.top = "";
+                menuToggle.style.right = ""; 
             }
         });
     }
@@ -37,14 +40,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cerrar el menú automáticamente al hacer clic en un enlace
     document.querySelectorAll('.nav-mobile a').forEach(link => {
         link.addEventListener('click', () => {
+            // 1. Cerrar menú
             navMobile.classList.remove('active');
             
-            // Restaurar el ícono y posición del botón
+            // 2. NUEVO: Desbloquear el scroll para poder navegar a la sección
+            document.body.classList.remove('no-scroll');
+            
+            // 3. Restaurar botón
             menuToggle.innerHTML = "☰";
-            menuToggle.style.position = "absolute";
+            menuToggle.style.position = "relative";
+            menuToggle.style.top = "";
+            menuToggle.style.right = "";
         });
     });
-
 
     /* =========================================
        2. CARRUSEL HERO (OBJETOS 3D)
