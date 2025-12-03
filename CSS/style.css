@@ -3,7 +3,6 @@
    ========================================= */
 :root {
     --brand-red: #BF1B28;
-    /* Azul Rey Institucional Fuerte */
     --brand-blue: #00477E; 
     --brand-yellow: #FAC22D;
     --brand-gray: #BCBABB;
@@ -18,25 +17,28 @@
     box-sizing: border-box;
 }
 
-/* --- BLOQUEO DE SCROLL HORIZONTAL --- */
+/* Bloqueo de scroll horizontal y suavidad */
 html, body {
-    width: 100%;             /* Asegura que ocupe el 100% del ancho */
-    max-width: 100%;         /* No permite que crezca más allá de la pantalla */
-    overflow-x: hidden;      /* LA CLAVE: Corta todo lo que se salga a los lados */
-    position: relative;      /* Ayuda a contener elementos absolutos */
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
 }
 
-html {
-    scroll-behavior: smooth; 
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-dark);
+    line-height: 1.6;
 }
 
 /* Ajuste para Header fijo */
 section { scroll-margin-top: 110px; }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--text-dark);
-    line-height: 1.6;
+/* Utilidad para bloquear scroll con JS */
+body.no-scroll {
+    overflow: hidden;
+    height: 100vh;
 }
 
 a { text-decoration: none; color: inherit; }
@@ -68,10 +70,10 @@ h2 {
 
 
 /* =========================================
-   2. HEADER (CON LOGO Y MENÚ)
+   2. HEADER (BARRA DE NAVEGACIÓN)
    ========================================= */
 .header-merged {
-    position: fixed; /* Fijo al hacer scroll */
+    position: fixed;
     top: 0; left: 0; width: 100%; height: 80px;
     z-index: 1000;
     background: transparent; 
@@ -79,14 +81,13 @@ h2 {
 }
 
 .header-merged.scrolled {
-    background-color: var(--brand-blue); 
+    background-color: var(--brand-blue);
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 .header-content-centered {
     display: flex;
-    /* CAMBIO: Separa Logo a la izq y Menú a la derecha */
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
     height: 100%;
     max-width: 1200px;
@@ -95,13 +96,11 @@ h2 {
     padding: 0 20px;
 }
 
-/* Nuevo Estilo para el Logo en el Header */
 .logo-header-link {
     display: flex;
     align-items: center;
     height: 100%;
 }
-
 .header-logo-img {
     height: 90px;
     width: auto;
@@ -111,10 +110,7 @@ h2 {
 .logo-header-link:hover .header-logo-img { transform: scale(1.05); }
 
 /* Menú Escritorio */
-.nav-desktop { 
-    display: flex; 
-    gap: 40px; 
-}
+.nav-desktop { display: flex; gap: 40px; }
 
 .nav-desktop a {
     color: white;
@@ -126,7 +122,7 @@ h2 {
 }
 .nav-desktop a:hover { color: var(--brand-yellow); }
 
-/* Elementos Móviles */
+/* Elementos Móviles (Ocultos en PC) */
 .menu-toggle { 
     display: none; 
     background: none;
@@ -170,7 +166,7 @@ h2 {
 
 
 /* =========================================
-   3. HERO SECTION (SOLO IMÁGENES CENTRADAS)
+   3. HERO SECTION (PORTADA 3D)
    ========================================= */
 .hero-3d-section {
     position: relative;
@@ -183,9 +179,9 @@ h2 {
     padding-top: 80px; /* Espacio para el header fijo */
     overflow: hidden;
 }
-/* CAMBIO CLAVE: Contenedor Centrado */
+
 .hero-grid-3d {
-    display: flex; /* Flex para centrar */
+    display: flex;
     justify-content: center; 
     align-items: center;
     width: 100%;
@@ -194,17 +190,15 @@ h2 {
     z-index: 2;
 }
 
-/* Contenedor Visual (Carrusel) */
 .hero-visuals {
     position: relative;
     height: 450px; 
-    width: 100%; /* Asegura centrado */
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Brillo detrás del auto */
 .glow-effect {
     position: absolute;
     width: 450px; 
@@ -214,7 +208,6 @@ h2 {
     z-index: 1;
 }
 
-/* Imágenes Flotantes 3D */
 .hero-object {
     position: absolute;
     max-height: 100%; 
@@ -228,12 +221,12 @@ h2 {
 
 .hero-object.active { 
     opacity: 1;
-    transform: translateX(0) scale(.75); /* Zoom para impacto */
+    transform: translateX(0) scale(.75); 
 }
 
 
 /* =========================================
-   4. SECCIÓN NOSOTROS
+   4. SECCIÓN NOSOTROS (ABOUT)
    ========================================= */
 .grid-2 {
     display: grid;
@@ -256,7 +249,6 @@ h2 {
     box-shadow: 0 15px 30px rgba(0,0,0,0.25);
     background-color: #000;
 }
-
 .about-video video {
     width: 100%; height: 100%;
     object-fit: cover; 
@@ -276,7 +268,6 @@ h2 {
     background-position: center;
     background-color: #e0e0e0;
 }
-
 .values-block::before {
     content: '';
     position: absolute;
@@ -284,7 +275,6 @@ h2 {
     background-color: rgba(220, 220, 220, 0.85); 
     z-index: 1;
 }
-
 .values-block .container { position: relative; z-index: 2; }
 
 .values-text {
@@ -293,7 +283,6 @@ h2 {
     flex-direction: column;
     justify-content: center;
 }
-
 .values-text p {
     margin-bottom: 30px;
     line-height: 1.8;
@@ -305,7 +294,6 @@ h2 {
     grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
-
 .value-img {
     width: 100%; height: 100%;
     object-fit: cover;
@@ -318,11 +306,7 @@ h2 {
 /* =========================================
    6. SECCIÓN EMPRESAS
    ========================================= */
-#empresas.section-padding {
-    padding-top: 20px; 
-    padding-bottom: 80px; 
-}
-
+#empresas.section-padding { padding-top: 20px; padding-bottom: 80px; }
 .section-header { text-align: center; margin-bottom: 50px; }
 
 .brands-grid {
@@ -337,9 +321,7 @@ h2 {
     background: white;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     transition: transform 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
 }
 .brand-card:hover { transform: translateY(-5px); cursor: pointer; }
 
@@ -347,7 +329,6 @@ h2 {
     display: flex; align-items: center; justify-content: center;
     width: 100%; height: 100%;
 }
-
 .brand-link img {
     max-width: 85%; max-height: 85%;
     object-fit: contain; 
@@ -363,18 +344,18 @@ h2 {
 
 
 /* =========================================
-   7. SECCIÓN SERVICIOS
+   7. SECCIÓN SERVICIOS (BANNER Y DETALLES WEB)
    ========================================= */
 .services-banner { 
     background-color: var(--brand-red); 
-    color: white; 
-    padding: 80px 0; 
+    color: white;     
+    padding: 60px 0; 
     overflow: hidden; 
 }
 
 .services-banner .grid-2 {
-    grid-template-columns: 2fr 1fr; 
-    gap: 60px;
+    grid-template-columns: 1.22fr 1fr; 
+    gap: 50px;
     align-items: center;
 }
 
@@ -386,7 +367,6 @@ h2 {
     height: 400px; 
     width: 100%;
 }
-
 .service-img {
     width: 100%; height: 100%;
     object-fit: cover; 
@@ -404,11 +384,11 @@ h2 {
     text-align: justify; 
 }
 
-/* Detalles 3D */
+/* Detalles (Cajas Blancas Flotantes - Estilo PC) */
 .services-details {
     position: relative;
     padding: 100px 0;
-    background-color: #f0f0f0;
+    background-color: white; /* Fondo blanco limpio para web */
     overflow: hidden;
 }
 
@@ -441,50 +421,14 @@ h2 {
     text-align: center;
 }
 
-/* Quitamos estilos de tarjeta en PC */
-.service-item {
-    background: transparent;
-    box-shadow: none;
-    border: none;
-    padding: 0;
-}
-
-.service-item h3 { 
-    font-style: italic; font-weight: 800; font-size: 1.4rem; 
-    margin-bottom: 10px; color: #111; text-transform: uppercase;
-}
-.service-item p {
-    font-size: 0.95rem; line-height: 1.4; 
-    color: #444; text-align: justify; margin: 0;
-}
-
-.toggle-btn {
-    display: none; 
-}
-
-/* El contenido siempre debe ser visible en la computadora */
-.card-content {
-    display: block;
-    opacity: 1;
-    max-height: none;
-    background: transparent;
-}
-
-.card-header {
-    background: transparent;
-    padding: 0;
-}
 
 
-/* =========================================
-   8. SECCIÓN CONTACTO
-   ========================================= */
+/* --- 8. SECCIÓN CONTACTO --- */
 .contact-section {
     background-color: #f4f6f8;
     padding: 100px 0;
     color: #333;
 }
-
 .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -522,22 +466,18 @@ h2 {
 .map-container iframe { border-radius: 8px; display: block; }
 
 
-/* =========================================
-   9. FOOTER
-   ========================================= */
+/* --- 9. FOOTER --- */
 .main-footer {
     width: 100%;
     background-color: var(--brand-blue);
     color: white;
     margin-top: auto;
 }
-
 .footer-bottom {
     padding: 25px 0;
     text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 .footer-bottom p {
     margin: 0;
     font-size: 0.9rem;
@@ -546,137 +486,165 @@ h2 {
     font-weight: 500;
 }
 
+/* --- UTILIDADES DE VISIBILIDAD --- */
 
-/* =========================================
-   10. RESPONSIVE DESIGN (MÓVILES)
-   ========================================= */
+/* Por defecto (Escritorio/PC): Ocultamos lo móvil */
+.mobile-only {
+    display: none !important;
+}
+
+/* Mostramos lo de escritorio */
+.desktop-only {
+    display: block !important;
+}
+
+
+/* ==========================================================================
+   MEDIA QUERIES (MÓVIL / TABLET - MAX 900PX)
+   ========================================================================== */
 @media (max-width: 900px) {
 
-    .section-header h2 {
+    .desktop-only { display: none; }
+    .mobile-only { display: flex; }
+
+    /* TARJETA INDIVIDUAL */
+    .app-card {
+        flex: 0 0 80%; /* Ancho de la tarjeta (80% de la pantalla) */
+        height: 400px; /* Altura fija para que se vean uniformes */
+        
+        background-size: cover;
+        background-position: center;
+        border-radius: 25px; /* Bordes muy redondeados (estilo moderno) */
+        
+        position: relative;
+        overflow: hidden;
+        scroll-snap-align: center;
+        
+        /* Sombra de elevación */
+        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        transition: transform 0.3s ease;
+    }
+
+    /* CAPA OSCURA (Gradiente de abajo hacia arriba) */
+    .card-overlay {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        /* Gradiente: Transparente arriba -> Negro abajo */
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.9) 100%);
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end; /* Texto abajo */
+        padding: 25px;
+    }
+
+    /* CONTENIDO DE TEXTO */
+    .card-content h3 {
+        color: white;
+        font-size: 1.8rem;
+        font-weight: 800;
+        margin-bottom: 5px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        text-align: left; /* Alineado a la izquierda como la referencia */
+    }
+
+    .card-content p {
+        color: rgba(255,255,255,0.8); /* Blanco suave */
+        font-size: 0.95rem;
+        line-height: 1.4;
+        margin-bottom: 20px;
+        text-align: left;
+        
+        /* Limitamos a 2 o 3 líneas para que se vea limpio */
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* BOTÓN BLANCO */
+    .card-btn {
+        width: 100%;
+        background-color: white;
+        color: #333;
+        border: none;
+        padding: 12px 0;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        transition: background 0.3s;
+    }
+    
+    .card-btn:active {
+        background-color: #f0f0f0;
+        transform: scale(0.98);
+    }
+
+    /* Ocultamos el texto completo por ahora (se usa con JS si quieres expandir) */
+    .full-text { display: none; }
+
+     .section-header h2 {
         font-size: 1.8rem; 
         margin-bottom: 30px;
         line-height: 1.2;
     }
-    
+
     .section-header .subtitle {
         font-size: 1rem;
         margin-bottom: 5px;
     }
 
-    /* 2. AJUSTE DE LA CUADRÍCULA DE LOGOS (2 Columnas) */
-    .brands-grid {
-        display: flex; /* En fila */
-        overflow-x: auto; /* Scroll horizontal */
-        gap: 20px;
-        scroll-snap-type: x mandatory; /* Efecto imán */
-        padding: 20px; /* Espacio para que la sombra no se corte */
-        justify-content: flex-start;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
-    .brands-grid::-webkit-scrollbar { display: none; }
-
-    /* 3. AJUSTE DE LAS TARJETAS (Hacerlas flexibles) */
-    .brand-card {
-        flex: 0 0 auto; /* No encoger ni estirar */
-        width: 220px; 
-        scroll-snap-align: center; /* Se centra al soltar */
-        margin: 0 auto; /* Centrado en su bloque */
-    }
-
-    .brand-link img {
-        filter: grayscale(0%) !important; 
-        max-width: 90%; 
-        max-height: 90%;
-    }
-
-    .header-logo-img {
-        height: 55px; 
-        width: auto;
-    }
-
-    /* Opcional: Ajustar el padding del header si se siente muy alto en móvil */
-    .header-merged {
-        height: 70px; /* Un poco más delgado que en PC (80px) */
-    }
-    
-    /* --- 1. HEADER Y MENÚ LATERAL (SIDEBAR) --- */
+    /* --- HEADER Y MENÚ LATERAL --- */
     .nav-desktop { display: none; }
-
-    .header-content-centered {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* <--- ESTA LÍNEA ES LA CLAVE */
-}
     
-    /* Botón Hamburguesa */
     .menu-toggle { 
         display: block; 
-        z-index: 2000; /* Siempre encima */
+        z-index: 2000; 
         position: relative; 
-        top: auto;
-        right: auto;
-        margin: 0;
-        line-height: 1;
-        padding: 10px;
+        top: auto; right: auto; margin: 0;
+        line-height: 1; padding: 10px;
     }
 
-    /* ESTILO MENÚ LATERAL (Deslizable desde la derecha) */
     .nav-mobile {
-        display: flex; /* Flex para alinear contenido */
-        flex-direction: column;
-        justify-content: flex-start; /* Contenido hacia arriba */
-        padding-top: 100px; /* Espacio para no chocar con el botón de cerrar */
+        display: flex; flex-direction: column;
+        justify-content: flex-start; 
+        padding-top: 100px; 
         position: fixed;
-        top: 0;
-        right: -100%; /* Oculto a la derecha fuera de pantalla */
-        left: auto;   /* Anulamos el left: 0 anterior */
-        width: 75%;   /* Ocupa solo el 75% de la pantalla */
-        max-width: 300px; /* Que no sea gigante en tablets */
-        height: 100vh;
+        top: 0; right: -100%; left: auto;
+        width: 75%; max-width: 300px; height: 100vh;
         background-color: rgba(3, 88, 140, 0.9);
         backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px); /* Para Iphone */
+        -webkit-backdrop-filter: blur(10px);
         border-top-left-radius: 30px;
         border-bottom-left-radius: 30px;
-
         z-index: 1500;
-        opacity: 1; /* Siempre opaco */
-        visibility: visible;
+        opacity: 1; visibility: visible;
         transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1), box-shadow 0.4s ease;
-
         box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
     }
 
-    /* CLASE ACTIVA (Desliza hacia adentro) */
     .nav-mobile.active {
-        right: 0; /* Se pega al borde derecho */
-
-        box-shadow: 
-        -5px 0 20px rgba(0,0,0,0.2), /* Sombra del borde del menú */
-        0 0 0 1000vmax rgba(0, 0, 0, 0.6);
+        right: 0; 
+        box-shadow: -5px 0 20px rgba(0,0,0,0.2), 0 0 0 1000vmax rgba(0, 0, 0, 0.6);
     }
 
     .nav-mobile a {
-        font-size: 1.2rem; /* Letra un poco más chica para que sea elegante */
-        margin: 10px 0;
-        width: 100%;
-        padding-left: 40px; /* Alineación limpia a la izquierda */
-        text-align: left;
-        border-left: 3px solid transparent; /* Línea decorativa invisible */
+        font-size: 1.2rem; margin: 10px 0; width: 100%;
+        padding-left: 40px; text-align: left;
+        border-left: 3px solid transparent;
     }
-    
     .nav-mobile a:hover, .nav-mobile a:active {
         background: rgba(255,255,255,0.1);
-        border-left: 3px solid var(--brand-yellow); /* Línea amarilla al tocar */
+        border-left: 3px solid var(--brand-yellow);
     }
-    
-    /* Ocultamos elementos 3D */
-    .hero-visuals, .glow-effect { display: none !important; }
 
+    /* --- HERO --- */
+    .hero-visuals, .glow-effect { display: none !important; }
+    
     .hero-3d-section {
         min-height: auto; 
-        padding: 130px 20px 40px; /* Padding superior para el header fijo */
+        padding: 130px 20px 40px; 
         background: 
             linear-gradient(to bottom, rgba(0, 71, 126, 0.9), rgba(0, 42, 77, 0.95)),
             url('/img/carrusel/almacen2.png'); 
@@ -684,219 +652,259 @@ h2 {
         background-position: center;
         align-items: flex-start; 
     }
-
     .hero-grid-3d {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        width: 100%;
+        display: flex; flex-direction: column;
+        justify-content: center; text-align: center; width: 100%;
     }
+    .header-logo-img { height: 55px; } /* Logo más chico */
 
-    /* Ajustes de Texto y Logo */
-    .hero-logo-wrapper { justify-content: center; margin-bottom: 15px; }
-    .hero-main-logo { height: 80px; } /* Logo un poco más chico en cel */
-
-    .hero-text-content h1 {
-        font-size: 2.2rem;
-        margin-bottom: 20px;
-    }
-    
-    .hero-text-content p {
-        display: none; /* Opcional: Ocultar el párrafo en celular para ahorrar más espacio */
-    }
-    
-    .hero-cta-btn {
-        padding: 12px 30px;
-        font-size: 0.9rem;
-    }
-
+    /* --- TEXTOS Y GRIDS GENERALES --- */
     .grid-2, .grid-3-center, .contact-grid, .footer-grid {
         grid-template-columns: 1fr;
         gap: 40px;
     }
-
-    .grid-2 {
-        display: flex; /* Cambiamos de Grid a Flex para manejar el orden fácilmente */
-        flex-direction: column; /* Apilamos uno sobre otro */
-        gap: 40px;
-    }
-
-    .about-text {
-        order: -1; /* La magia: Un número negativo lo manda al principio de todo */
-        
-        padding: 0 20px; 
-        text-align: center; 
-    }
-
-    /* Ajustes visuales generales */
+    .text-center { width: 100%; }
+    
     .about-text, .values-text { padding-right: 0; text-align: center; }
-    .about-video { 
-        margin-bottom: 30px;
-        width: 300px;
-        box-shadow: 0 5px 15px rgba (0,0,0,0.15); 
-    }
+    .about-text { order: -1; padding: 0 20px; }
+    .about-video { margin-bottom: 30px; width: 100%; box-shadow: 0 5px 15px rgba(0,0,0,0.15); }
 
-    .values-text h2 {
-        font-size: 1.8rem; 
-        line-height: 1.2;
-        margin-bottom: 20px;
-        padding: 0 10px;
+    /* Ajuste Títulos */
+    .about-text h2, .values-text h2, .section-header h2, .services-intro h2 {
+        font-size: 1.8rem; line-height: 1.2;
+        margin-bottom: 20px; padding: 0 10px;
     }
+    .subtitle { font-size: 1rem; margin-bottom: 5px; }
 
-    .subtitle {
-        font-size: 1rem; /* Antes 1.2rem */
-        margin-bottom: 5px;
-    }
-
-    .about-text h2 {
-        font-size: 1.8rem; 
-        line-height: 1.2;
-        margin-bottom: 20px; /* Separación con el texto */
-        padding: 0 10px;     /* Pequeño margen lateral */
-    }
-
-    .about-text p {
-        font-size: 1rem; /* Tamaño de lectura cómodo */
-        line-height: 1.6;
-        text-align: justify; 
-        
-        margin-bottom: 20px;
-    }
-    
-    .services-bg-layer { display: none; }
-    .services-card { box-shadow: none; padding: 20px; width: 100%; }
-    .services-list { grid-template-columns: 1fr; gap: 30px; }
-    
-    .map-container { height: 300px; order: -1; }
-    .footer-bottom { padding: 15px; font-size: 0.8rem; }
-
-    .values-block .grid-2 {
-       display: flex;
-       flex-direction: column;
-       gap: 40px;
-    }
-
-    /* Acomodamos el texto */
-    .values-text {
-       order: -1; /* Asegura que el texto aparezca primero */
-       padding: 0;
-       width: 100%;
-    }
-
+    /* --- SECCIÓN VALORES (CARRUSEL) --- */
     .values-text p {
-        text-align: justify; 
-        -webkit-hyphens: auto;
-        -ms-hyphens: auto;
-        hyphens: auto;        
-        line-height: 1.6; /* Un poco más de aire entre líneas */
-        margin-bottom: 20px;
-        font-size: 1rem;
-        padding: 0 10px;
+        text-align: justify;
+        -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto;
+        line-height: 1.6; font-size: 1rem;
+        padding: 0 10px; margin-bottom: 20px;
     }
-
-    /* 2. TRANSFORMACIÓN A CARRUSEL DESLIZANTE (CSS Scroll Snap) */
     .values-grid {
-       display: flex;
-       overflow-x: auto;
-       gap: 20px;
-       scroll-snap-type: x mandatory;
-       padding: 20px;
-       scrollbar-width: none; /* Para Firefox */
-       -ms-overflow-style: none;  /* Para IE y Edge */
+        display: flex; overflow-x: auto; gap: 20px;
+        scroll-snap-type: x mandatory; padding: 20px;
+        scrollbar-width: none;
     }
+    .values-grid::-webkit-scrollbar { display: none; }
+    
+    .value-img { flex: 0 0 auto; width: 85%; }
 
-    /* Ocultar barra scroll en Chrome, Safari, Opera */
-    .values-grid::-webkit-scrollbar {
-        display: none;
+    /* --- SECCIÓN EMPRESAS (CARRUSEL) --- */
+    .brands-grid {
+        display: flex; overflow-x: auto; gap: 20px;
+        scroll-snap-type: x mandatory; padding: 20px;
+        justify-content: flex-start; scrollbar-width: none;
     }
+    .brands-grid::-webkit-scrollbar { display: none; }
+    
+    .brand-card { flex: 0 0 auto; width: 220px; scroll-snap-align: center; margin: 0 auto; }
+    .brand-link img { filter: grayscale(0%) !important; max-width: 90%; max-height: 90%; }
 
-    /* 3. ESTILO DE LAS FOTOS DENTRO DEL CARRUSEL */
-    .value-img {
-       flex: 0 0 auto;
-       width: 85%;
-       aspect-ratio: 1/1;
-       height: auto;
-       scroll-snap-align: center;
-       box-shadow: 0 15px 30px rgba(0,0,0,0.25);
-       border-radius: 15px;
+    /* --- SECCIÓN SERVICIOS (BANNER ROJO) --- */
+    .services-banner .grid-2 { display: flex; flex-direction: column; gap: 30px; }
+    .services-intro { order: -1; text-align: center; padding: 0 20px; }
+    .services-intro p { 
+        font-size: 1rem; line-height: 1.4; text-align: justify; 
+        -webkit-hyphens: auto; hyphens: auto; margin-bottom: 15px; padding: 0 10px;
     }
-
-}
-
-.services-banner .grid-2 {
-        /* Cambiamos Grid a Flex vertical para controlar el orden */
-        display: flex;
-        flex-direction: column;
-        gap: 30px; /* Espacio entre el texto y las fotos */
-    }
-
-    /* 1. TEXTO PRIMERO (ARRIBA) */
-    .services-intro {
-        order: -1; /* Lo mandamos al principio */
-        
-        text-align: center; 
-        padding: 0 20px;    
-    }
-
-    .services-intro h2 {
-        font-size: 1.8rem; /* Título pequeño */
-        line-height: 1.2;
-        margin-bottom: 20px;
-    }
-
-    .services-intro p {
-        font-size: 1rem;
-        line-height: 1.6;
-        text-align: justify; /* Justificado */
-        
-        -webkit-hyphens: auto;
-        hyphens: auto;
-        
-        margin-bottom: 20px;
-    }
-
-    /* 2. IMÁGENES DESPUÉS (ABAJO - TIPO CARRUSEL) */
+    
     .services-collage {
-        /* Ya no necesitamos order aquí, caerá abajo naturalmente */
-        
-        /* Configuración del Carrusel */
+        display: flex; overflow-x: auto; height: 300px; gap: 15px; padding: 10px 0;
+        scroll-snap-type: x mandatory; width: 100%;
+        grid-template-columns: none; grid-template-rows: none;
+    }
+    .services-collage::-webkit-scrollbar { display: none; }
+    
+    .services-collage .service-img {
+        flex: 0 0 auto; width: 85%; height: 100%;
+        object-fit: cover; border-radius: 12px; scroll-snap-align: center;
+    }
+
+    /* --- SECCIÓN SERVICIOS (FLIP CARDS MÓVIL) --- */
+    .services-bg-layer { display: none; }
+    .services-card { background: transparent; box-shadow: none; padding: 0; width: 100%; }
+    
+    .services-list.app-cards {
         display: flex;
         overflow-x: auto;
-        height: 300px; 
-        gap: 15px;
-        padding: 10px 0;
-        
+        gap: 20px;
+        padding: 20px 20px 50px 20px; /* Espacio para sombra */
         scroll-snap-type: x mandatory;
-        width: 100%;
         
-        /* Quitamos estilos de escritorio */
-        align-self: auto;
+        /* Quitamos estilos de grid anteriores */
         grid-template-columns: none;
-        grid-template-rows: none;
+    }
+
+   .services-list-mobile {
+        display: flex;
+        overflow-x: auto; /* Scroll lateral */
+        gap: 20px;
+        padding: 40px 20px; /* Espacio generoso para que las sombras no se corten */
+        scroll-snap-type: x mandatory; /* Efecto imán */
+        align-items: center; /* Centrado vertical */
+        
+        /* Aseguramos que no herede estilos de escritorio */
+        grid-template-columns: none;
+        width: 100%;
     }
     
-    .services-collage::-webkit-scrollbar { display: none; }
+    /* Ocultar barra de scroll */
+    .services-list-mobile::-webkit-scrollbar { display: none; }
 
-    /* Estilo de las fotos individuales en móvil */
-    .services-collage .service-img {
-        flex: 0 0 auto; 
-        width: 85%; /* Ancho cómodo para ver la siguiente */
-        height: 100%; 
+
+    /* 2. TARJETA INDIVIDUAL (CONTENEDOR 3D) */
+    .app-card {
+        /* Tamaño fijo y proporción vertical tipo "Smartphone" */
+        flex: 0 0 80%; /* Ancho: 80% de la pantalla */
+        max-width: 320px;
+        height: 420px; /* Altura fija */
         
-        object-fit: cover;
-        border-radius: 12px;
-        scroll-snap-align: center;
+        perspective: 1200px; /* Profundidad para el efecto 3D */
+        scroll-snap-align: center; /* Se centra al soltar */
+        background: transparent; /* Transparente para que gire lo de adentro */
+        margin: 0 auto;
+    }
+
+    /* 3. CONTENEDOR INTERNO QUE GIRA */
+    .service-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1); /* Giro suave y elegante */
+        transform-style: preserve-3d; /* Clave para 3D */
+        border-radius: 25px;
         
-        /* Quitamos la propiedad vertical del escritorio */
-        grid-row: auto; 
+        /* Sombra de elevación general */
+        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
+
+    /* CLASE QUE ACTIVA EL GIRO (JS) */
+    .app-card.flipped .service-inner {
+        transform: rotateY(180deg);
+    }
+
+
+    /* 4. CARAS DE LA TARJETA (FRENTE Y ATRÁS) */
+    .card-front, .card-back {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        
+        /* Oculta la parte de atrás al girar */
+        -webkit-backface-visibility: hidden; 
+        backface-visibility: hidden;
+        
+        border-radius: 25px; /* Bordes muy redondeados */
+        overflow: hidden;
+    }
+
+
+    /* --- CARA FRONTAL (IMAGEN + TEXTO + BOTÓN) --- */
+    .card-front {
+        background-size: cover !important;
+        background-position: center !important;
+        background-color: #333; /* Color de respaldo */
+    }
+
+    /* Overlay oscuro (Gradiente) para que se lea el texto */
+    .card-overlay {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        /* Gradiente de transparente a negro abajo */
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 20%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.9) 100%);
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end; /* Texto pegado abajo */
+        padding: 30px 20px;
+    }
+
+    .card-content h3 {
+        color: white;
+        font-size: 1.6rem;
+        font-weight: 800;
+        margin-bottom: 5px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        text-align: left;
+    }
+
+    .card-content p {
+        color: rgba(255,255,255,0.9);
+        font-size: 0.95rem;
+        line-height: 1.4;
+        margin-bottom: 15px;
+        text-align: left;
+        
+        /* Límite de líneas para que se vea limpio */
+        display: -webkit-box;
+        -webkit-line-camp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Botón Blanco Estilo "Reserve" */
+    .card-btn {
+        width: 100%;
+        background-color: white;
+        color: #111;
+        border: none;
+        padding: 12px 0;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        transition: transform 0.2s;
     }
     
-    .vertical { grid-row: auto; }
-    
+    .card-btn:active {
+        transform: scale(0.95); /* Efecto de clic */
+    }
 
-/* --- UTILIDAD: BLOQUEAR SCROLL --- */
-body.no-scroll {
-    overflow: hidden; /* Evita que se pueda bajar o subir */
-    height: 100vh; /* Asegura que se congele en el lugar */
+
+    /* --- CARA TRASERA (INFORMACIÓN COMPLETA) --- */
+    .card-back {
+        background-color: white;
+        color: #333;
+        transform: rotateY(180deg); /* Inicia volteada hacia atrás */
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+        text-align: center;
+        
+        /* Borde decorativo inferior */
+        border-bottom: 8px solid var(--brand-red);
+    }
+
+    .card-back h3 {
+        color: var(--brand-blue);
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        font-weight: 800;
+    }
+
+    .card-back p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #555;
+    }
+    
+    /* Botón de regreso */
+    .close-btn {
+        margin-top: 20px;
+        background: none;
+        border: 2px solid var(--brand-gray);
+        padding: 8px 20px;
+        border-radius: 20px;
+        color: #666;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
 }
