@@ -180,6 +180,7 @@ h2 {
     overflow: hidden;
 }
 
+
 .hero-grid-3d {
     display: flex;
     justify-content: center; 
@@ -422,7 +423,6 @@ h2 {
 }
 
 
-
 /* --- 8. SECCIÓN CONTACTO --- */
 .contact-section {
     background-color: #f4f6f8;
@@ -459,7 +459,7 @@ h2 {
 
 .map-container {
     width: 100%; height: 450px;
-    background: white; padding: 10px;
+    background: rgb(255, 255, 255); padding: 10px;
     border-radius: 12px;
     box-shadow: 0 15px 40px rgba(0,0,0,0.1);
 }
@@ -496,6 +496,10 @@ h2 {
 /* Mostramos lo de escritorio */
 .desktop-only {
     display: block !important;
+}
+
+.main-footer {
+    overscroll-behavior: contain;
 }
 
 
@@ -679,9 +683,13 @@ h2 {
     /* --- SECCIÓN VALORES (CARRUSEL) --- */
     .values-text p {
         text-align: justify;
-        -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto;
-        line-height: 1.6; font-size: 1rem;
-        padding: 0 10px; margin-bottom: 20px;
+        -webkit-hyphens: auto; 
+        -ms-hyphens: auto; 
+        hyphens: auto;
+        line-height: 1.6; 
+        font-size: 1rem;
+        padding: 0 10px; 
+        margin-bottom: 20px;
     }
     .values-grid {
         display: flex; overflow-x: auto; gap: 20px;
@@ -704,11 +712,26 @@ h2 {
     .brand-link img { filter: grayscale(0%) !important; max-width: 90%; max-height: 90%; }
 
     /* --- SECCIÓN SERVICIOS (BANNER ROJO) --- */
-    .services-banner .grid-2 { display: flex; flex-direction: column; gap: 30px; }
-    .services-intro { order: -1; text-align: center; padding: 0 20px; }
+    .services-banner .grid-2 { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 30px; 
+    }
+
+    .services-intro { 
+        order: -1; 
+        text-align: center; 
+        padding: 0 20px; 
+    }
+
     .services-intro p { 
-        font-size: 1rem; line-height: 1.4; text-align: justify; 
-        -webkit-hyphens: auto; hyphens: auto; margin-bottom: 15px; padding: 0 10px;
+        font-size: 1rem; 
+        line-height: 1.4; 
+        text-align: justify; 
+        -webkit-hyphens: auto; 
+        hyphens: auto; 
+        margin-bottom: 15px; 
+        padding: 0 2px;
     }
     
     .services-collage {
@@ -723,188 +746,248 @@ h2 {
         object-fit: cover; border-radius: 12px; scroll-snap-align: center;
     }
 
-    /* --- SECCIÓN SERVICIOS (FLIP CARDS MÓVIL) --- */
-    .services-bg-layer { display: none; }
-    .services-card { background: transparent; box-shadow: none; padding: 0; width: 100%; }
-    
-    .services-list.app-cards {
-        display: flex;
-        overflow-x: auto;
-        gap: 20px;
-        padding: 20px 20px 50px 20px; /* Espacio para sombra */
-        scroll-snap-type: x mandatory;
-        
-        /* Quitamos estilos de grid anteriores */
-        grid-template-columns: none;
-    }
+    /* --- SECCIÓN SERVICIOS --- */
+   .services-bg-layer {
+    display: none !important;
+}
 
-   .services-list-mobile {
-        display: flex;
-        overflow-x: auto; /* Scroll lateral */
-        gap: 20px;
-        padding: 40px 20px; /* Espacio generoso para que las sombras no se corten */
-        scroll-snap-type: x mandatory; /* Efecto imán */
-        align-items: center; /* Centrado vertical */
-        
-        /* Aseguramos que no herede estilos de escritorio */
-        grid-template-columns: none;
-        width: 100%;
-    }
-    
-    /* Ocultar barra de scroll */
-    .services-list-mobile::-webkit-scrollbar { display: none; }
+.services-card {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+}
 
+/* Contenedor de la lista: una tarjeta debajo de otra */
+.services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 10px 20px 40px;
+}
 
-    /* 2. TARJETA INDIVIDUAL (CONTENEDOR 3D) */
-    .app-card {
-        /* Tamaño fijo y proporción vertical tipo "Smartphone" */
-        flex: 0 0 80%; /* Ancho: 80% de la pantalla */
-        max-width: 320px;
-        height: 420px; /* Altura fija */
-        
-        perspective: 1200px; /* Profundidad para el efecto 3D */
-        scroll-snap-align: center; /* Se centra al soltar */
-        background: transparent; /* Transparente para que gire lo de adentro */
-        margin: 0 auto;
-    }
+/* ==== CARD BASE ==== */
+.services-list {
+    /* Usamos Grid para forzar el centrado absoluto */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, max-content));
+    justify-content: center; /* Clave: Centra todo el bloque grid horizontalmente */
+    gap: 30px;              /* Espacio entre tarjetas */
+    width: 100%;            /* Fuerza a ocupar todo el ancho disponible */
+    max-width: 1400px;      /* Evita que se estire infinito en pantallas 4k */
+    margin: 0 auto;         /* Centra el contenedor mismo en la página */
+    padding: 40px 20px;     /* Aire alrededor */
+    box-sizing: border-box;
+}
 
-    /* 3. CONTENEDOR INTERNO QUE GIRA */
-    .service-inner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1); /* Giro suave y elegante */
-        transform-style: preserve-3d; /* Clave para 3D */
-        border-radius: 25px;
-        
-        /* Sombra de elevación general */
-        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-    }
+/* Si esto falla por alguna regla externa, añade esto para asegurar: */
+.container.services-card {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 
-    /* CLASE QUE ACTIVA EL GIRO (JS) */
-    .app-card.flipped .service-inner {
-        transform: rotateY(180deg);
-    }
+/* ==== 2. LA TARJETA (El bloque con la imagen) ==== */
+.service-item {
+    position: relative;
+    width: 320px; 
+    max-width: 100%; 
+    height: 540px;             /* Altura elegante */
+    border-radius: 36px;       /* Bordes muy redondeados */
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    flex-shrink: 0;
+}
+
+/* Asignación de imágenes (Manteniendo tu orden) */
+.service-item:nth-child(1) { background-image: url('/img/servicios/chatarra2.png'); } /* Destrucción */
+.service-item:nth-child(2) { background-image: url('/img/chatarra_motor.png'); } /* Inhabilitación */
+.service-item:nth-child(3) { background-image: url('/img/chatarra3.png'); } /* Compactación */
+.service-item:nth-child(4) { background-image: url('/img/metal_cutting.jpg'); } /* Yunque */
 
 
-    /* 4. CARAS DE LA TARJETA (FRENTE Y ATRÁS) */
-    .card-front, .card-back {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        
-        /* Oculta la parte de atrás al girar */
-        -webkit-backface-visibility: hidden; 
-        backface-visibility: hidden;
-        
-        border-radius: 25px; /* Bordes muy redondeados */
-        overflow: hidden;
-    }
+/* ==== 3. EFECTO GLASSMORPHISM (El vidrio inferior) ==== */
+.service-glass {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%; /* Abarca el 60% inferior de la tarjeta */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Empuja el texto hacia abajo */
+    padding: 30px 24px;        /* Espacio interno */
+    box-sizing: border-box;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0) 100%
+    );
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 30%);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ==== 4. TIPOGRAFÍA (Dentro del vidrio) ==== */
+.service-glass h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;   /* Tamaño del título */
+    font-weight: 800;    /* Letra gruesa */
+    color: #fff;
+    text-transform: uppercase; /* Como tienes los títulos en mayúsculas, esto asegura estilo */
+    letter-spacing: 0.05em;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    line-height: 1.1;
+}
+
+/* ==== TEXTO DEL PÁRRAFO ==== */
+.service-glass p {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: justify;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    word-spacing: -0.05em; 
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* CONTACTO - OPTIMIZADO PARA MÓVIL */
+.contact-section {
+    width: 100%;
+    padding: 60px 15px 40px;
+    background: linear-gradient(to bottom,#C0161C 0%,#A90E14 100%);
+}
+
+/* Contenedor principal FULL WIDTH y centrado */
+.contact-details {
+    width: 100%; /* Usamos todo el ancho disponible */
+    max-width: 640px; /* Lí­mite para que no se deforme en pantallas medianas */
+    margin: 0 auto 35px;
+    padding: 40px 16px; /* Más aire interno */
+    background: rgba(148, 148, 148, 0.186);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,0.22);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Centramos encabezados */
+.section-header-left {
+    text-align: center;
+}
+
+/* Mejor jerarquía visual */
+.section-header-left .subtitle {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.95);
+}
+
+.section-header-left h2 {
+    margin-top: 8px;
+    margin-bottom: 22px; 
+    color: #fff;
+    font-size: 1.6rem;
+}
+
+/* ===== CARDS DE CONTACTO ===== */
+.contact-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Card secundaria */
+.contact-item {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.08); /* Glass suave */
+    padding: 14px 16px;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+    border: none;
+}
+
+/* Íconos LIMPIOS sin fondo */
+.icon-box {
+    font-size: 1.35rem;
+    min-width: 30px;
+    text-align: center;
+    color: #fff;
+}
+
+.contact-item strong {
+    font-size: 0.90rem;
+    font-weight: 700;
+    color: #fff;
+    text-align: left;
+}
+
+/* Texto reducido sin desbordes */
+.contact-item p,
+.contact-item a {
+    font-size: 0.82rem;
+    line-height: 1.35;
+    color: rgba(255,255,255,0.90);
+    text-align: left;
+    word-break: break-word; /* Para evitar que URLs se salgan */
+}
+
+/* ===== MAPA ===== */
+.map-container {
+    height: 310px; /* Un poquito más compacto */
+    margin-top: 2px; /* Se acerca al bloque de contacto */
+    border-radius: 18px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.10); /* Transparencia ligera sobre el rojo */
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Footer compacto estilo móvil con color solicitado */
+.main-footer {
+    background-color: #034B80; /* Azul mostrado en tu imagen */
+    padding: 12px 0 8px; /* Más pequeño */
+    text-align: center;
+}
+
+/* Texto más pequeño, ligero y bien centrado */
+.footer-bottom p {
+    font-size: 0.48rem; /* Reducido */
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    color: rgba(255,255,255,0.90); /* Que se lea bien */
+    margin: 0;
+}
+
+/* Ajustamos margen interno del contenedor */
+.footer-bottom .container {
+    padding: 0 8px;
+}
 
 
-    /* --- CARA FRONTAL (IMAGEN + TEXTO + BOTÓN) --- */
-    .card-front {
-        background-size: cover !important;
-        background-position: center !important;
-        background-color: #333; /* Color de respaldo */
-    }
-
-    /* Overlay oscuro (Gradiente) para que se lea el texto */
-    .card-overlay {
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        /* Gradiente de transparente a negro abajo */
-        background: linear-gradient(to bottom, rgba(0,0,0,0) 20%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.9) 100%);
-        
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end; /* Texto pegado abajo */
-        padding: 30px 20px;
-    }
-
-    .card-content h3 {
-        color: white;
-        font-size: 1.6rem;
-        font-weight: 800;
-        margin-bottom: 5px;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        text-align: left;
-    }
-
-    .card-content p {
-        color: rgba(255,255,255,0.9);
-        font-size: 0.95rem;
-        line-height: 1.4;
-        margin-bottom: 15px;
-        text-align: left;
-        
-        /* Límite de líneas para que se vea limpio */
-        display: -webkit-box;
-        -webkit-line-camp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
-    /* Botón Blanco Estilo "Reserve" */
-    .card-btn {
-        width: 100%;
-        background-color: white;
-        color: #111;
-        border: none;
-        padding: 12px 0;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 0.9rem;
-        cursor: pointer;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        transition: transform 0.2s;
-    }
-    
-    .card-btn:active {
-        transform: scale(0.95); /* Efecto de clic */
-    }
-
-
-    /* --- CARA TRASERA (INFORMACIÓN COMPLETA) --- */
-    .card-back {
-        background-color: white;
-        color: #333;
-        transform: rotateY(180deg); /* Inicia volteada hacia atrás */
-        
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 30px;
-        text-align: center;
-        
-        /* Borde decorativo inferior */
-        border-bottom: 8px solid var(--brand-red);
-    }
-
-    .card-back h3 {
-        color: var(--brand-blue);
-        font-size: 1.5rem;
-        margin-bottom: 15px;
-        font-weight: 800;
-    }
-
-    .card-back p {
-        font-size: 1rem;
-        line-height: 1.6;
-        color: #555;
-    }
-    
-    /* Botón de regreso */
-    .close-btn {
-        margin-top: 20px;
-        background: none;
-        border: 2px solid var(--brand-gray);
-        padding: 8px 20px;
-        border-radius: 20px;
-        color: #666;
-        font-size: 0.8rem;
-        font-weight: bold;
-    }
 }
